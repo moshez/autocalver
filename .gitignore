@@ -1,5 +1,5 @@
-/dist
+dist
 /build
 __pycache__
 *.egg-info
-/git-log-head
+git-log-head

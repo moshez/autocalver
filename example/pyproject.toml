@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "autocalver"]
+
+[project]
+name = "fake-project"
+description = "A fake project"
+readme = "README.rst"
+authors = [{name = "Moshe Zadka", email = "fake-project-author@devskillup.com"}]
+
+[tool.autocalver]
+use = true
+log = "git-log-head"
+is_main_var = "GITHUB_REF"
+is_main_match = ".*/main$"
+
+[project.entry-points."setuptools.finalize_distribution_options"]
+autocalver = "setuptools.finalize_distribution_options"
