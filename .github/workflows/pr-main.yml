@@ -32,5 +32,6 @@ jobs:
           tox --version
       - name: Run Tox
         run: |
+          git log -n 1 --date=iso > git-log-head
           tox -e ${{ matrix.check }}
 
