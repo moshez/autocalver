@@ -80,3 +80,10 @@ def guess_version(dist: setuptools.Distribution):  # pragma: no cover
     """
     configuration = get_configuration(".")
     set_dist_version(dist, configuration=configuration, environ=os.environ)
+
+def find_files(path):
+    configuration = get_configuration(path)
+    if configuration.get("use", False) is not True:
+        return
+    log = configuration["log"]
+    return [log]
