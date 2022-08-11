@@ -1,5 +1,10 @@
 [build-system]
 requires = ["setuptools>=45", "wheel", "autocalver"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fake-project"
+dynamic = ["version"]
 
 [tool.autocalver]
 use = true
