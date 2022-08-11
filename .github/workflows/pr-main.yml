@@ -1,0 +1,36 @@
+
+
+on: [push, pull_request]
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { python: "3.10", os: ubuntu-latest, check: "py310-lint" }
+          - { python: "3.10", os: ubuntu-latest, check: "py310-test" }
+    name: ${{ matrix.check }} on Python ${{ matrix.python }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3.0.2
+
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v4.0.0
+        with:
+          python-version: "${{ matrix.python }}"
+
+      - name: Upgrade pip
+        run: |
+          pip install --upgrade pip
+          pip --version
+
+      - name: Install Tox
+        run: |
+          pip install tox
+          nox --version
+      - name: Run Tox
+        run: |
+          tox -e ${{ matrix.check }}
+
