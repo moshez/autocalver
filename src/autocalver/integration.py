@@ -68,7 +68,7 @@ def _get_log_contents(configuration):
         command_line = shlex.split(command)
         res = subprocess.run(command_line, check=True, text=True, capture_output=True)
         log_file.write_text(res.stdout)
-        return log_file_read_text()        
+        return log_file_read_text()
 
 
 def set_dist_version(dist, *, configuration, environ):
@@ -96,10 +96,11 @@ def guess_version(dist: setuptools.Distribution):  # pragma: no cover
     configuration = get_configuration(".")
     set_dist_version(dist, configuration=configuration, environ=os.environ)
 
+
 def find_files(path):
     """
     setuptools entrypoint
-    
+
     Add the version control log to the data files
     """
     configuration = get_configuration(path)

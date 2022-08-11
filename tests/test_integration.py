@@ -239,12 +239,20 @@ def test_no_log():
     dist.metadata.version = "1.2.3.4"
     with tempfile.TemporaryDirectory() as dirname:
         log_name = dirname + "/git-log-head"
-        command = shlex.join(["python", "-c", textwrap.dedent("""\
+        command = shlex.join(
+            [
+                "python",
+                "-c",
+                textwrap.dedent(
+                    """\
             print("----ignored-line")
             print("Date:   2021-10-11 08:11:13 -0100")
             print("")
             print("    a comment")
-        """)])
+        """
+                ),
+            ]
+        )
         configuration = dict(
             use=True,
             log=log_name,
@@ -264,7 +272,7 @@ def test_no_log():
     hours -= 1  # TZ offset
     assert hours == 8
 
-    
+
 def test_find_files_no_use():
     """
     Find files returns empty if use is not true
@@ -283,6 +291,7 @@ def test_find_files_no_use():
         pyproject.write_text(configuration)
         found = integration.find_files(tmpdir)
     assert found == []
+
 
 def test_find_files_use_git_log_head():
     """
