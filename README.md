@@ -75,6 +75,17 @@ is_main_var = "BUILD_BRANCH_REF"
 is_main_match = ".*/main$"
 ```
 
+Note that if you use the
+`[project]`
+entry in
+`pyproject.toml`,
+it must:
+
+* Not have
+  `version`
+* Explicitly declare
+  `dynamic = ["version"]`
+
 ## Building packages
 
 Based on the given environment variable
@@ -107,7 +118,7 @@ in its name.
 Simulate tagged build:
 
 ```
-$ BUILD_BRANCH_REF=refs/tags/test-fix-PROJ-121 python -m build -n --wheel 2>& 1| tail -1
+$ GITHUB_REF=refs/tags/test-fix-PROJ-121 python -m build -n --wheel 2>& 1| tail -1
 Successfully built fake_package-2021.10.10.56384rc1-py3-none-any.whl
 ```
 
@@ -124,7 +135,7 @@ these do not produce releases.
 Simulate merge to main:
 
 ```
-$ BUILD_BRANCH_REF=refs/heads/main python -m build -n --wheel 2>& 1| tail -1
+$ GITHUB_REF=refs/heads/main python -m build -n --wheel 2>& 1| tail -1
 Successfully built fake_package-2021.10.10.56384-py3-none-any.whl
 ```
 
