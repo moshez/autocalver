@@ -5,6 +5,7 @@ Test automatic versioning calculations
 import pathlib
 import tempfile
 import textwrap
+import shlex
 from unittest import mock
 
 import pytest
@@ -228,3 +229,85 @@ def test_no_date():
         )
         with pytest.raises(ValueError):
             integration.set_dist_version(dist, configuration=configuration, environ={})
+
+
+def test_no_log():
+    """
+    Without a log, the log command is being run
+    """
+    dist = mock.Mock(name="dist")
+    dist.metadata.version = "1.2.3.4"
+    with tempfile.TemporaryDirectory() as dirname:
+        log_name = dirname + "/git-log-head"
+        command = shlex.join(
+            [
+                "python",
+                "-c",
+                textwrap.dedent(
+                    """\
+            print("----ignored-line")
+            print("Date:   2021-10-11 08:11:13 -0100")
+            print("")
+            print("    a comment")
+        """
+                ),
+            ]
+        )
+        configuration = dict(
+            use=True,
+            log=log_name,
+            log_command=command,
+            is_main_var="BRANCH",
+            is_main_match="main$",
+        )
+        integration.set_dist_version(dist, configuration=configuration, environ={})
+    parts = dist.metadata.version.split(".")
+    assert parts[-1].rstrip("0123456789") == "dev"
+    year, month, day, seconds = map(int, parts[:-1])
+    assert (year, month, day) == (2021, 10, 11)
+    minutes, seconds = divmod(seconds, 60)
+    assert seconds == 13
+    hours, minutes = divmod(minutes, 60)
+    assert minutes == 11
+    hours -= 1  # TZ offset
+    assert hours == 8
+
+
+def test_find_files_no_use():
+    """
+    Find files returns empty if use is not true
+    """
+    configuration = textwrap.dedent(
+        """
+    [tool.autocalver]
+    use = false
+    log = "git-log-head"
+    is_main_var = "BUILD_BRANCH_REF"
+    is_main_match = ".*/main$"
+    """
+    )
+    with tempfile.TemporaryDirectory() as tmpdir:
+        pyproject = pathlib.Path(tmpdir) / "pyproject.toml"
+        pyproject.write_text(configuration)
+        found = integration.find_files(tmpdir)
+    assert found == []
+
+
+def test_find_files_use_git_log_head():
+    """
+    Find files returns log if use is true
+    """
+    configuration = textwrap.dedent(
+        """
+    [tool.autocalver]
+    use = true
+    log = "git-log-head"
+    is_main_var = "BUILD_BRANCH_REF"
+    is_main_match = ".*/main$"
+    """
+    )
+    with tempfile.TemporaryDirectory() as tmpdir:
+        pyproject = pathlib.Path(tmpdir) / "pyproject.toml"
+        pyproject.write_text(configuration)
+        found = integration.find_files(tmpdir)
+    assert found == ["git-log-head"]
