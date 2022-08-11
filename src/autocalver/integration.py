@@ -97,8 +97,13 @@ def guess_version(dist: setuptools.Distribution):  # pragma: no cover
     set_dist_version(dist, configuration=configuration, environ=os.environ)
 
 def find_files(path):
+    """
+    setuptools entrypoint
+    
+    Add the version control log to the data files
+    """
     configuration = get_configuration(path)
     if configuration.get("use", False) is not True:
-        return
+        return []
     log = configuration["log"]
     return [log]
