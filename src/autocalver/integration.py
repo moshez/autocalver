@@ -38,9 +38,9 @@ def _version_from_datetime(when):
 
 def _get_suffix(branch_value, match):
     if branch_value == "":
-        return ".dev1"
+        return "dev1"
     elif not re.match(match, branch_value):
-        return ".rc1"
+        return "rc1"
     else:
         return ""
 

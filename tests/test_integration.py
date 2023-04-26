@@ -154,8 +154,9 @@ def test_release_candidate():
             dist, configuration=configuration, environ=dict(BRANCH="proj-121")
         )
     parts = dist.metadata.version.split(".")
-    assert parts[-1].rstrip("0123456789") == "rc"
-    year, month, day, seconds = map(int, parts[:-1])
+    assert parts[-1].strip("0123456789") == "rc"
+    year, month, day = map(int, parts[:-1])
+    seconds = int(parts[-1].split("rc")[0])
     assert (year, month, day) == (2021, 10, 11)
     minutes, seconds = divmod(seconds, 60)
     assert seconds == 13
@@ -192,8 +193,9 @@ def test_local_build():
         )
         integration.set_dist_version(dist, configuration=configuration, environ={})
     parts = dist.metadata.version.split(".")
-    assert parts[-1].rstrip("0123456789") == "dev"
-    year, month, day, seconds = map(int, parts[:-1])
+    assert parts[-1].strip("0123456789") == "dev"
+    year, month, day = map(int, parts[:-1])
+    seconds = int(parts[-1].split("dev")[0])
     assert (year, month, day) == (2021, 10, 11)
     minutes, seconds = divmod(seconds, 60)
     assert seconds == 13
@@ -262,8 +264,9 @@ def test_no_log():
         )
         integration.set_dist_version(dist, configuration=configuration, environ={})
     parts = dist.metadata.version.split(".")
-    assert parts[-1].rstrip("0123456789") == "dev"
-    year, month, day, seconds = map(int, parts[:-1])
+    assert parts[-1].strip("0123456789") == "dev"
+    year, month, day = map(int, parts[:-1])
+    seconds = int(parts[-1].split("dev")[0])
     assert (year, month, day) == (2021, 10, 11)
     minutes, seconds = divmod(seconds, 60)
     assert seconds == 13

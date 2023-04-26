@@ -7,8 +7,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { python: "3.10", os: ubuntu-latest, check: "py310-lint" }
-          - { python: "3.10", os: ubuntu-latest, check: "py310-test" }
+          - { python: "3.10", os: ubuntu-latest, check: "lint" }
+          - { python: "3.10", os: ubuntu-latest, check: "mypy" }
+          - { python: "3.10", os: ubuntu-latest, check: "build" }
+          - { python: "3.10", os: ubuntu-latest, check: "docs" }
+          - { python: "3.10", os: ubuntu-latest, check: "tests-3.10" }
+          - { python: "3.9", os: ubuntu-latest, check: "tests-3.9" }
+          - { python: "3.11", os: ubuntu-latest, check: "tests-3.11" }
     name: ${{ matrix.check }} on Python ${{ matrix.python }} (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
 
@@ -26,12 +31,11 @@ jobs:
           pip install --upgrade pip
           pip --version
 
-      - name: Install Tox
+      - name: Install Nox
         run: |
-          pip install tox
-          tox --version
-      - name: Run Tox
+          pip install nox
+          nox --version
+      - name: Run nox
         run: |
-          git log -n 1 --date=iso > git-log-head
-          tox -e ${{ matrix.check }}
+          nox -e ${{ matrix.check }}
 

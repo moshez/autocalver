@@ -14,8 +14,10 @@ autocalver = "autocalver.integration:guess_version"
 autocalver = "autocalver.integration:find_files"
 
 [project.optional-dependencies]
-test = ["coverage", "pytest"]
+tests = ["coverage", "pytest"]
 lint = ["black", "mypy", "flake8", "pylint"]
+mypy = ["mypy", "types-python-dateutil"]
+docs = ["sphinx"]
 
 
 [tool.autocalver]
