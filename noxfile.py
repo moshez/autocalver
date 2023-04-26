@@ -78,7 +78,7 @@ def docs(session):
     session.install("-r", "requirements-docs.txt")
     session.install("-e", ".")
     sphinx = ["sphinx-build", "-b", "html", "-W", "-d", doctrees, ".", html]
-    session.cd("doc")
+    session.cd("docs")
     session.run(*sphinx)
 
 
