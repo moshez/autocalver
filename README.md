@@ -30,7 +30,7 @@ The right way to make sure
 is installed is to require it in
 `pyproject.toml`:
 
-```
+```toml
 [build-system]
 requires = ["setuptools>=45", "wheel", "autocalver"]
 ```
@@ -49,8 +49,8 @@ with
 `git`,
 you can use
 
-```
-$ git log -n 1 --date=iso > git-log-head
+```shell
+git log -n 1 --date=iso > git-log-head
 ```
 
 One advantage of separating the stages like that is that it is possible
@@ -67,7 +67,7 @@ For example,
 a configuration appropriate to
 pipeline CI might be:
 
-```
+```toml
 [tool.autocalver]
 use = true
 log = "git-log-head"
@@ -105,7 +105,7 @@ October 10, 2021, 8:39:44 in Pacific time).
 
 Local build:
 
-```
+```console
 $ python -m build -n --wheel 2>& 1| tail -1
 Successfully built fake_package-2021.10.10.56384.dev1-py3-none-any.whl
 ```
@@ -117,7 +117,7 @@ in its name.
 
 Simulate tagged build:
 
-```
+```console
 $ GITHUB_REF=refs/tags/test-fix-PROJ-121 python -m build -n --wheel 2>& 1| tail -1
 Successfully built fake_package-2021.10.10.56384rc1-py3-none-any.whl
 ```
@@ -134,16 +134,16 @@ these do not produce releases.
 
 Simulate merge to main:
 
-```
+```console
 $ GITHUB_REF=refs/heads/main python -m build -n --wheel 2>& 1| tail -1
 Successfully built fake_package-2021.10.10.56384-py3-none-any.whl
 ```
 
 Note that without
-:code:`use = true`,
+`use = true`,
 the tool will not replace the version.
 If
-:code:`use = true`
+`use = true`
 is there,
 missing any of the other variables
 will cause an
