@@ -8,6 +8,7 @@ jobs:
       matrix:
         include:
           - { python: "3.10", os: ubuntu-latest, check: "lint" }
+          - { python: "3.10", os: ubuntu-latest, check: "mypy" }
           - { python: "3.10", os: ubuntu-latest, check: "build" }
           - { python: "3.10", os: ubuntu-latest, check: "docs" }
           - { python: "3.10", os: ubuntu-latest, check: "tests-3.10" }
