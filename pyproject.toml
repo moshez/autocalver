@@ -16,7 +16,7 @@ autocalver = "autocalver.integration:find_files"
 [project.optional-dependencies]
 tests = ["coverage", "pytest"]
 lint = ["black", "mypy", "flake8", "pylint"]
-mypy = ["mypy"]
+mypy = ["mypy", "types-python-dateutil"]
 docs = ["sphinx"]
 
 
