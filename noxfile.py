@@ -9,6 +9,7 @@ VERSIONS = ["3.9", "3.11", "3.10"]
 nox.options.envdir = "build/nox"
 nox.options.sessions = ["lint", "tests", "mypy", "docs", "build"]
 
+
 @nox.session(python=VERSIONS)
 def tests(session):
     tmpdir = session.create_tmp()
