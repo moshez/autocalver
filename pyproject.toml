@@ -4,5 +4,6 @@ requires = ["setuptools>=45", "wheel", "autocalver"]
 [tool.autocalver]
 use = true
 log = "git-log-head"
+log_command = "git log -n 1 --date=iso"
 is_main_var = "GITHUB_REF"
 is_main_match = ".*/main$"
