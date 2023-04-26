@@ -1,16 +1,16 @@
 name: Release
 
 on:
-  release:
-    types:
-      - published
+  push:
+    branches:
+      - main
 
 permissions: # added using https://github.com/step-security/secure-workflows
   contents: read
 
 jobs:
   build:
-    name: Build and sign artifacts
+    name: Build
     runs-on: ubuntu-latest
     permissions:
       id-token: write
