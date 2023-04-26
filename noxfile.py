@@ -3,7 +3,7 @@ import os
 
 import nox
 
-PROJECT = "seashore"
+PROJECT = "autocalver"
 VERSIONS = ["3.9", "3.11", "3.10"]
 
 nox.options.envdir = "build/nox"
@@ -14,7 +14,7 @@ def tests(session):
     tmpdir = session.create_tmp()
     session.install("-r", "requirements-tests.txt")
     session.install("-e", ".")
-    tests = session.posargs or [f"{PROJECT}.tests"]
+    tests = session.posargs or ["tests"]
     session.run(
         "coverage",
         "run",
@@ -22,7 +22,7 @@ def tests(session):
         f"--source={PROJECT}",
         "--omit=**/__main__.py",
         "-m",
-        "virtue",
+        "pytest",
         *tests,
         env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage"), TMPDIR=tmpdir),
     )
