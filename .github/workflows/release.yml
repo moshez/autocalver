@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - trunk
 
 permissions: # added using https://github.com/step-security/secure-workflows
   contents: read
