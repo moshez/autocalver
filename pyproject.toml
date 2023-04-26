@@ -1,6 +1,23 @@
 [build-system]
 requires = ["setuptools>=45", "wheel", "autocalver"]
 
+[project]
+name = "autocalver"
+dynamic = ["version"]
+dependencies = ["tomli", "python-dateutil"]
+readme = "README.md"
+
+[project.entry-points."setuptools.finalize_distribution_options"]
+autocalver = "autocalver.integration:guess_version"
+
+[project.entry-points."setuptools.file_finders"]
+autocalver = "autocalver.integration:find_files"
+
+[project.optional-dependencies]
+test = ["coverage", "pytest"]
+lint = ["black", "mypy", "flake8", "pylint"]
+
+
 [tool.autocalver]
 use = true
 log = "git-log-head"
