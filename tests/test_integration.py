@@ -265,7 +265,7 @@ def test_no_log():
         integration.set_dist_version(dist, configuration=configuration, environ={})
     parts = dist.metadata.version.split(".")
     assert parts[-1].strip("0123456789") == "dev"
-    year, month, day  = map(int, parts[:-1])
+    year, month, day = map(int, parts[:-1])
     seconds = int(parts[-1].split("dev")[0])
     assert (year, month, day) == (2021, 10, 11)
     minutes, seconds = divmod(seconds, 60)
