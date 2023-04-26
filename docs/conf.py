@@ -1,5 +1,3 @@
-# Copyright (c) Shopkick
-# See LICENSE for details.
 import os
 import sys
 
