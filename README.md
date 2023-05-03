@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/autocalver.svg)](https://badge.fury.io/py/autocalver)
 ![GitHub Actions Status](https://github.com/moshez/autocalver/actions/workflows/pr-main.yml/badge.svg)
-
+[![Documentation Status](https://readthedocs.org/projects/autocalver/badge/?version=latest)](https://autocalver.readthedocs.io/en/latest/?badge=latest)
 
 Tired of
 "bumping versions"?
