@@ -1,5 +1,12 @@
 # autocalver
 
+.. image:: https://badge.fury.io/py/autocalver.svg
+    :target: https://badge.fury.io/py/autocalver
+
+.. image:: https://badge.fury.io/gh/moshez%2Fautocalver.svg
+    :target: https://badge.fury.io/gh/moshez%2Fautocalver
+
+
 Tired of
 "bumping versions"?
 Sick of commits,
