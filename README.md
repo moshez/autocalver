@@ -1,8 +1,7 @@
 # autocalver
 
 [![PyPI version](https://badge.fury.io/py/autocalver.svg)](https://badge.fury.io/py/autocalver)
-
-[![GitHub version](https://badge.fury.io/gh/moshez%2Fautocalver.svg)](https://badge.fury.io/gh/moshez%2Fautocalver)
+![GitHub Actions Status](https://github.com/moshez/autocalver/actions/workflows/pr-main.yml/badge.svg)
 
 
 Tired of
