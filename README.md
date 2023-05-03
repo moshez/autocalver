@@ -1,10 +1,8 @@
 # autocalver
 
-.. image:: https://badge.fury.io/py/autocalver.svg
-    :target: https://badge.fury.io/py/autocalver
+[![PyPI version](https://badge.fury.io/py/autocalver.svg)](https://badge.fury.io/py/autocalver)
 
-.. image:: https://badge.fury.io/gh/moshez%2Fautocalver.svg
-    :target: https://badge.fury.io/gh/moshez%2Fautocalver
+[![GitHub version](https://badge.fury.io/gh/moshez%2Fautocalver.svg)](https://badge.fury.io/gh/moshez%2Fautocalver)
 
 
 Tired of
