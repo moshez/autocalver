@@ -1,5 +1,9 @@
 # autocalver
 
+[![PyPI version](https://badge.fury.io/py/autocalver.svg)](https://badge.fury.io/py/autocalver)
+![GitHub Actions Status](https://github.com/moshez/autocalver/actions/workflows/pr-main.yml/badge.svg)
+[![Documentation Status](https://readthedocs.org/projects/autocalver/badge/?version=latest)](https://autocalver.readthedocs.io/en/latest/?badge=latest)
+
 Tired of
 "bumping versions"?
 Sick of commits,
@@ -35,7 +39,8 @@ is installed is to require it in
 requires = ["setuptools>=45", "wheel", "autocalver"]
 ```
 
-Note that
+Note that,
+by default,
 `autocalver`
 will
 *not*
@@ -57,10 +62,10 @@ One advantage of separating the stages like that is that it is possible
 to have the package builder itself running in an environent that does not
 have access to the version control metadata,
 only the source files and the prefix of the commit log.
-Failing to produce the log will cause the package build to fail.
 
 The tool overrides the version in the
-`setup.cfg`.
+`setup.cfg`,
+if any.
 Configuration is done via
 `pyproject.toml`.
 For example,
@@ -151,3 +156,16 @@ will cause an
 during the build,
 as a non-existing build
 is better than a broken when.
+
+## Automatically fetching the latest commit
+
+Defining the optional field
+`log_command`
+will run the command
+if the file is unavailable
+at package build time.
+It will create the file
+for next time.
+Note that if the file is
+"out of date",
+it needs to be manually removed.
